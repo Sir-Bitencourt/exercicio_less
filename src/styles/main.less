@@ -1,32 +1,38 @@
-    @import "variables";
-    @import "mixins";
-    @import "components/header";
-    @import "components/products";
-
-    // Estilos globais
-    * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: @font-family;
-    }
-
-    body {
-    background-color: @background;
-    }
-
-    .container {
-    max-width: @container-max-width;
+.products {
+    margin-top: 40px;
+    .\grid-layout(3, 1%);  // Mixin de layout da grade, com 3 colunas e 1% de gap
+    row-gap: 4%;
     width: 100%;
-    margin: 0 auto;
-
-    // Media Query usando escaping
-    @media screen and (max-width: @breakpoints[tablet]) {
-        max-width: 80%;
-    }
-    }
-
-    section {
-    padding: 56px 0;
-    }
     
+    .product-item {
+        img {
+            width: 100%;
+            border-radius: 16px;
+        }
+
+        .product-button {
+            display: block;
+            background-color: @buttonColor;
+            color: @textColor;
+            padding: 8px 0;
+            border-radius: 8px;
+            margin-top: 8px;
+
+            &:hover {
+                background-color: @buttonColor;
+            }
+        }
+    }
+
+    // Usando o mixin para aplicar regras
+    .\responsive(tablet, {
+        .\grid-layout(2, 3%);  // 2 colunas no tablet com 3% de gap
+    });
+
+    .\responsive(mobile, {
+        display: block;
+        .product-item {
+            margin-bottom: 32px;
+        }
+    });
+}

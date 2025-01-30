@@ -1,14 +1,14 @@
-// Mixin para media queries usando mapas
+// Mixin para Media Queries
 .responsive(@breakpoint, @rules) {
-    @size: @breakpoints[$@breakpoint]; // <- Alterado aqui
+    @size: extract(@breakpoints, @breakpoint); // Usando a função extract para pegar o valor correto
     @media screen and (max-width: @size) {
-    @rules();
+        @rules(); // Chama as regras passadas no mixin
     }
 }
-    
-    // Mixin para grid
-    .grid-layout(@columns, @gap: 1%) {
-        display: grid;
-        grid-template-columns: repeat(@columns, calc((100% - (@gap * (@columns - 1))) / @columns));
-        gap: @gap;
-    }      
+
+// Mixin para grid
+.\grid-layout(@columns, @gap: 1%) {
+    display: grid;
+    grid-template-columns: repeat(@columns, calc((100% - (@gap * (@columns - 1))) / @columns));
+    gap: @gap;
+}
